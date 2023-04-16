@@ -46,6 +46,7 @@ function ResponsiveAppBar() {
 
   const navigate = useNavigate();
   const navHome = () => {
+    
     navigate("/home");
   };
   const navAppointments = () => {
@@ -62,31 +63,28 @@ function ResponsiveAppBar() {
         position="static"
         style={{
           backgroundColor: "#5ABF84",
-          borderRadius: "100px",
-          width: "100%",
+          borderRadius: "25px",
+          width: "87%",
+          marginLeft:"6.5%",
         }}
       >
         <Container maxWidth="lg">
           <Toolbar disableGutters>
-            <LocalHospitalRoundedIcon
-              sx={{
-                display: { xs: "none", md: "flex", color: "background" },
-                mr: 1,
-              }}
-            />
+            
             <Typography
-              variant="h6"
+              variant="h4"
               sx={{
                 mr: 2,
-                display: { xs: "none", md: "flex", color: "white" },
+                display: { xs: "none", md: "flex", color: "black" },
                 fontFamily: "monospace",
-                fontWeight: 700,
+                fontWeight: 2000,
                 letterSpacing: ".3rem",
-                color: "yellowgreen",
+                color:'black',
                 textDecoration: "none",
               }}
+              className="fw-bold"
             >
-              MEDICARE
+              Medicare
             </Typography>
 
             <Nav
@@ -96,14 +94,14 @@ function ResponsiveAppBar() {
             >
               <Button size="sm">
                 <Nav.Item>
-                  <Nav.Link eventKey="link-0" onClick={navHome}>
+                  <Nav.Link  className="fw-bold" eventKey="link-0" onClick={navHome}>
                     Home
                   </Nav.Link>
                 </Nav.Item>
               </Button>
               <Button size="sm">
                 <Nav.Item>
-                  <Nav.Link eventKey="link-1" onClick={navAppointments}>
+                  <Nav.Link className="fw-bold" eventKey="link-1" onClick={navAppointments}>
                     Appointments
                   </Nav.Link>
                 </Nav.Item>
@@ -119,14 +117,27 @@ function ResponsiveAppBar() {
                   </Nav.Link>
                 </Nav.Item>
               </Button>
+              <Button size="sm">
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="link-3"
+                    className="fw-bold"
+                    onClick={handleShow}
+                    onClose={handleCloseUserMenu}
+                  >
+                    Profile
+                  </Nav.Link>
+                </Nav.Item>
+              </Button>
             </Nav>
+            
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              {/*<Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
-              </Tooltip>
+            </Tooltip>*/}
 
               <Menu
                 sx={{ mt: "45px" }}

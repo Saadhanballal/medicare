@@ -356,20 +356,25 @@ export default function EnhancedTable() {
           width: "100%",
 
           background: "#5ABF84",
-          borderRadius: "20px",
+          borderRadius: "25px",
         }}
       >
         <Typography
-          className="container fw-bold"
+          className="container fw-bold my-3"
           sx={{ flex: "1 1 100%", marginLeft: 2 }}
           variant="h5"
           id="tableTitle"
           component="div"
         >
+          {" "}
           Recent Patients
         </Typography>
+
         <Box sx={{ width: 743, marginTop: "1%" }}>
-          <Paper sx={{ width: "100%", mb: 2, borderRadius: "20px" }}>
+          <Paper
+            className=" bg-info"
+            sx={{ width: "100%", mb: 2, borderRadius: "20px" }}
+          >
             <EnhancedTableToolbar numSelected={selected.length} />
             <TableContainer>
               <Table

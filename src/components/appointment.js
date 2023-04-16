@@ -1,30 +1,91 @@
 import * as React from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
 import Modal from "react-bootstrap/Modal";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDateTimePicker } from "@mui/x-date-pickers/StaticDateTimePicker";
 import { useState } from "react";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Button } from "react-bootstrap";
+import EditIcon from "@mui/icons-material/Edit";
+
+const Search = styled("div")(({ theme }) => ({
+  position: "sticky",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  marginTop: "1%",
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "97%",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "130ch",
+      "&:focus": {
+        width: "130ch",
+      },
+    },
+  },
+}));
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 200 },
-  { field: "lastName", headerName: "Last name", width: 200 },
+  { field: "firstName", headerName: "First name", width: 120 },
+  { field: "lastName", headerName: "Last name", width: 120 },
   { field: "age", headerName: "Age", type: "number", width: 40 },
   {
     field: "fullName",
     headerName: "Full name",
     sortable: false,
-    width: 400,
+    width: 200,
     valueGetter: (params) =>
       `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
   { field: "date", headerName: "Date", width: 180 },
-  { field: "time", headerName: "Time", width: 180, sortable: false },
-  { field: "duration", headerName: "Duration", width: 180, sortable: false },
+  { field: "time", headerName: "Time", width: 150, sortable: false },
+  { field: "duration", headerName: "Duration", width: 120, sortable: false },
+  {
+    headerName: "",
+    width: 200,
+    sortable: false,
+    renderCell: ({}) => (
+      <>
+        <IconButton onClick={null}>
+          <DeleteIcon />
+        </IconButton>
+      </>
+    )
+  },
 ];
 
 const rows = [
@@ -77,7 +138,7 @@ const rows = [
     id: 6,
     lastName: "Melisandre",
     firstName: "Quin",
-    age: 150,
+    age: 50,
     date: "03/04/2023",
     time: "10:50 AM",
     duration: "40 Min",
@@ -117,43 +178,7 @@ const rows = [
     date: "03/04/2023",
     time: "2:30 PM",
     duration: "30 Min",
-  },
-  {
-    id: 10,
-    lastName: "Roxie",
-    firstName: "Harvey",
-    age: 65,
-    date: "03/04/2023",
-    time: "2:30 PM",
-    duration: "30 Min",
-  },
-  {
-    id: 10,
-    lastName: "Roxie",
-    firstName: "Harvey",
-    age: 65,
-    date: "03/04/2023",
-    time: "2:30 PM",
-    duration: "30 Min",
-  },
-  {
-    id: 10,
-    lastName: "Roxie",
-    firstName: "Harvey",
-    age: 65,
-    date: "03/04/2023",
-    time: "2:30 PM",
-    duration: "30 Min",
-  },
-  {
-    id: 10,
-    lastName: "Roxie",
-    firstName: "Harvey",
-    age: 65,
-    date: "03/04/2023",
-    time: "2:30 PM",
-    duration: "30 Min",
-  },
+  }
 ];
 
 export default function DataTable() {
@@ -164,13 +189,12 @@ export default function DataTable() {
   }
   return (
     <div
-      className="container"
+      className="container fw-bolder"
       style={{
-        height: 700,
+        height: 630,
         width: "100%",
         background: "#5ABF84",
-        marginTop: "5px",
-        borderRadius: "20px",
+        borderRadius: "25px",
       }}
     >
       <Modal size="lg" show={show} onHide={() => setShow(false)}>
@@ -184,14 +208,15 @@ export default function DataTable() {
           </LocalizationProvider>
         </Modal.Body>
       </Modal>
+
       <Typography
         className="container fw-bold pt-4"
-        sx={{ flex: "1 1 100%", marginLeft: 2 }}
+        sx={{ flex: "1 1 100%", marginLeft: 2, marginTop: 1 }}
         variant="h5"
         id="tableTitle"
         component="div"
       >
-        Upcoming Appointments
+        Appointments
         <Button
           className="btn btn-info shadow"
           onClick={handleshow}
@@ -199,20 +224,29 @@ export default function DataTable() {
             justifyContent: "center",
             marginLeft: "1%",
             marginBottom: 4,
-            color: "white",
+            color: "black",
+            
           }}
         >
           <CalendarMonthIcon></CalendarMonthIcon>New Appointment
         </Button>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
       </Typography>
       <DataGrid
-        className="container mb-1 mt-4 bg-info"
-        style={{ borderRadius: "20px", height: "600px" }}
+        className="container mb-1  mt-4 bg-info"
+        style={{ borderRadius: "20px", height: "470px" }}
         rows={rows}
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
-        checkboxSelection
       />
     </div>
   );
