@@ -46,7 +46,6 @@ function ResponsiveAppBar() {
 
   const navigate = useNavigate();
   const navHome = () => {
-    
     navigate("/home");
   };
   const navAppointments = () => {
@@ -65,12 +64,11 @@ function ResponsiveAppBar() {
           backgroundColor: "#5ABF84",
           borderRadius: "25px",
           width: "87%",
-          marginLeft:"6.5%",
+          marginLeft: "6.5%",
         }}
       >
         <Container maxWidth="lg">
           <Toolbar disableGutters>
-            
             <Typography
               variant="h4"
               sx={{
@@ -79,7 +77,7 @@ function ResponsiveAppBar() {
                 fontFamily: "monospace",
                 fontWeight: 2000,
                 letterSpacing: ".3rem",
-                color:'black',
+                color: "black",
                 textDecoration: "none",
               }}
               className="fw-bold"
@@ -94,14 +92,22 @@ function ResponsiveAppBar() {
             >
               <Button size="sm">
                 <Nav.Item>
-                  <Nav.Link  className="fw-bold" eventKey="link-0" onClick={navHome}>
+                  <Nav.Link
+                    className="fw-bold text-dark"
+                    eventKey="link-0"
+                    onClick={navHome}
+                  >
                     Home
                   </Nav.Link>
                 </Nav.Item>
               </Button>
               <Button size="sm">
                 <Nav.Item>
-                  <Nav.Link className="fw-bold" eventKey="link-1" onClick={navAppointments}>
+                  <Nav.Link
+                    className="fw-bold text-dark"
+                    eventKey="link-1"
+                    onClick={navAppointments}
+                  >
                     Appointments
                   </Nav.Link>
                 </Nav.Item>
@@ -110,7 +116,7 @@ function ResponsiveAppBar() {
                 <Nav.Item>
                   <Nav.Link
                     eventKey="link-2"
-                    className="fw-bold"
+                    className="fw-bold text-dark"
                     onClick={navPatients}
                   >
                     Patients
@@ -121,7 +127,7 @@ function ResponsiveAppBar() {
                 <Nav.Item>
                   <Nav.Link
                     eventKey="link-3"
-                    className="fw-bold"
+                    className="fw-bold text-dark"
                     onClick={handleShow}
                     onClose={handleCloseUserMenu}
                   >
@@ -130,7 +136,6 @@ function ResponsiveAppBar() {
                 </Nav.Item>
               </Button>
             </Nav>
-            
 
             <Box sx={{ flexGrow: 0 }}>
               {/*<Tooltip title="Open settings">

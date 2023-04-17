@@ -84,7 +84,7 @@ const columns = [
           <DeleteIcon />
         </IconButton>
       </>
-    )
+    ),
   },
 ];
 
@@ -178,7 +178,7 @@ const rows = [
     date: "03/04/2023",
     time: "2:30 PM",
     duration: "30 Min",
-  }
+  },
 ];
 
 export default function DataTable() {
@@ -189,7 +189,7 @@ export default function DataTable() {
   }
   return (
     <div
-      className="container fw-bolder"
+      className="container fw-bolder shadow"
       style={{
         height: 630,
         width: "100%",
@@ -225,7 +225,6 @@ export default function DataTable() {
             marginLeft: "1%",
             marginBottom: 4,
             color: "black",
-            
           }}
         >
           <CalendarMonthIcon></CalendarMonthIcon>New Appointment
