@@ -1,6 +1,6 @@
 import * as React from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
 import Modal from "react-bootstrap/Modal";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -13,7 +13,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button } from "react-bootstrap";
-import EditIcon from "@mui/icons-material/Edit";
+import Image from "react-bootstrap/Image";
 
 const Search = styled("div")(({ theme }) => ({
   position: "sticky",
@@ -58,140 +58,116 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 120 },
-  { field: "lastName", headerName: "Last name", width: 120 },
-  { field: "age", headerName: "Age", type: "number", width: 40 },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    sortable: false,
-    width: 200,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-  { field: "date", headerName: "Date", width: 180 },
-  { field: "time", headerName: "Time", width: 150, sortable: false },
-  { field: "duration", headerName: "Duration", width: 120, sortable: false },
-  {
-    headerName: "",
-    width: 200,
-    sortable: false,
-    renderCell: ({}) => (
-      <>
-        <IconButton onClick={null}>
-          <DeleteIcon />
-        </IconButton>
-      </>
-    ),
-  },
-];
-
-const rows = [
-  {
-    id: 1,
-    lastName: "Snow",
-    firstName: "Jon",
-    age: 35,
-    date: "03/04/2023",
-    time: "9:00 AM",
-    duration: "20 Min",
-  },
-  {
-    id: 2,
-    lastName: "Lannister",
-    firstName: "Cersei",
-    age: 42,
-    date: "03/04/2023",
-    time: "9:25 AM",
-    duration: "10 Min",
-  },
-  {
-    id: 3,
-    lastName: "Lannister",
-    firstName: "Jaime",
-    age: 45,
-    date: "03/04/2023",
-    time: "9:40 AM",
-    duration: "20 Min",
-  },
-  {
-    id: 4,
-    lastName: "Stark",
-    firstName: "Arya",
-    age: 16,
-    date: "03/04/2023",
-    time: "10:00 AM",
-    duration: "30 Min",
-  },
-  {
-    id: 5,
-    lastName: "Targaryen",
-    firstName: "Daenerys",
-    age: 24,
-    date: "03/04/2023",
-    time: "10:30 AM",
-    duration: "15 Min",
-  },
-  {
-    id: 6,
-    lastName: "Melisandre",
-    firstName: "Quin",
-    age: 50,
-    date: "03/04/2023",
-    time: "10:50 AM",
-    duration: "40 Min",
-  },
-  {
-    id: 7,
-    lastName: "Clifford",
-    firstName: "Ferrara",
-    age: 44,
-    date: "03/04/2023",
-    time: "11:45 AM",
-    duration: "15 Min",
-  },
-  {
-    id: 8,
-    lastName: "Frances",
-    firstName: "Rossini",
-    age: 36,
-    date: "03/04/2023",
-    time: "12:00 PM",
-    duration: "30 Min",
-  },
-  {
-    id: 9,
-    lastName: "Roxie",
-    firstName: "Harvey",
-    age: 65,
-    date: "03/04/2023",
-    time: "2:00 PM",
-    duration: "15 Min",
-  },
-  {
-    id: 10,
-    lastName: "Roxie",
-    firstName: "Harvey",
-    age: 65,
-    date: "03/04/2023",
-    time: "2:30 PM",
-    duration: "30 Min",
-  },
-];
-
 export default function DataTable() {
   const [show, setShow] = useState(false);
 
   function handleshow(breakpoint) {
     setShow(true);
   }
+
+  let [rows, setrows] = useState([
+    {
+      id: 1,
+      lastName: "Snow",
+      firstName: "Jon",
+      age: 35,
+      date: "03/04/2023",
+      time: "9:00 AM",
+      duration: "20 Min",
+    },
+    {
+      id: 2,
+      lastName: "Lannister",
+      firstName: "Cersei",
+      age: 42,
+      date: "03/04/2023",
+      time: "9:25 AM",
+      duration: "10 Min",
+    },
+    {
+      id: 3,
+      lastName: "Lannister",
+      firstName: "Jaime",
+      age: 45,
+      date: "03/04/2023",
+      time: "9:40 AM",
+      duration: "20 Min",
+    },
+    {
+      id: 4,
+      lastName: "Stark",
+      firstName: "Arya",
+      age: 16,
+      date: "03/04/2023",
+      time: "10:00 AM",
+      duration: "30 Min",
+    },
+    {
+      id: 5,
+      lastName: "Targaryen",
+      firstName: "Daenerys",
+      age: 24,
+      date: "03/04/2023",
+      time: "10:30 AM",
+      duration: "15 Min",
+    },
+    {
+      id: 6,
+      lastName: "Melisandre",
+      firstName: "Quin",
+      age: 50,
+      date: "03/04/2023",
+      time: "10:50 AM",
+      duration: "40 Min",
+    },
+    {
+      id: 7,
+      lastName: "Clifford",
+      firstName: "Ferrara",
+      age: 44,
+      date: "03/04/2023",
+      time: "11:45 AM",
+      duration: "15 Min",
+    },
+    {
+      id: 8,
+      lastName: "Frances",
+      firstName: "Rossini",
+      age: 36,
+      date: "03/04/2023",
+      time: "12:00 PM",
+      duration: "30 Min",
+    },
+    {
+      id: 9,
+      lastName: "Roxie",
+      firstName: "Harvey",
+      age: 65,
+      date: "03/04/2023",
+      time: "2:00 PM",
+      duration: "15 Min",
+    },
+    {
+      id: 10,
+      lastName: "Roxie",
+      firstName: "Harvey",
+      age: 65,
+      date: "03/04/2023",
+      time: "2:30 PM",
+      duration: "30 Min",
+    },
+  ]);
+
+  const deleteById = (id) => {
+    setrows((oldValues) => {
+      return oldValues.filter((item) => item.id !== id);
+    });
+  };
+
   return (
     <div
       className="container fw-bolder shadow"
       style={{
-        height: 630,
         width: "100%",
         background: "#5ABF84",
         borderRadius: "25px",
@@ -239,14 +215,65 @@ export default function DataTable() {
           />
         </Search>
       </Typography>
-      <DataGrid
-        className="container mb-1  mt-4 bg-info"
-        style={{ borderRadius: "20px", height: "470px" }}
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-      />
+
+      <div>
+        {rows.map((item) => (
+          <div
+            className="container-fluid mt-4"
+            style={{
+              height: "110px",
+              backgroundColor: "#D9EDDF",
+              borderRadius: "25px",
+            }}
+          >
+            <div key={item.id} className="d-flex flex-row">
+              <div className="row flex-shrink-1 align-self-center">
+                {/* User profile picture */}
+                <Image
+                  className="row mx-3"
+                  width={80}
+                  height={80}
+                  src={require("../assets/pfp.jpg")}
+                  roundedCircle
+                />
+              </div>
+              {/* User name */}
+              <div className="row flex-grow-1 mx-3">
+                <div className="d-flex">
+                  <h2 className="mt-1 w-100">
+                    Name:{item.firstName} {item.lastName}
+                  </h2>
+                  <div className="d-flex p-2 w-100 justify-content-end">
+                    <div
+                      className="btn btn-info mx-2"
+                      style={{ width: "75px", borderRadius: "10px" }}
+                    >
+                      Edit
+                    </div>
+
+                    <div
+                      className="btn btn-danger mx-2"
+                      style={{ width: "75px", borderRadius: "10px" }}
+                      onClick={() => deleteById(item.id)}
+                    >
+                      Delete
+                    </div>
+                  </div>
+                </div>
+
+                {/* appointment details display */}
+                <div className="row d-flex">
+                  <h5 className="col mt-4 ">Appointment No: {item.id}</h5>
+                  <h5 className="col mt-4">Date: {item.date}</h5>
+                  <h5 className="col mt-4">Time: {item.time}</h5>
+                  <h5 className="col mt-4">Duration: {item.duration}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3" style={{ height: "10px" }}></div>
     </div>
   );
 }
