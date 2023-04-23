@@ -14,6 +14,9 @@ import { styled, alpha } from "@mui/material/styles";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Image from "react-bootstrap/Image";
+
+import Card from "react-bootstrap/Card";
 
 const Search = styled("div")(({ theme }) => ({
   position: "sticky",
@@ -86,127 +89,17 @@ const columns = [
   },
   { field: "height", headerName: "Height", type: "height", width: 100 },
   { field: "weight", headerName: "Weight", type: "weight", width: 100 },
-  { field:"visit",type:"btn",width:100,
+  {
+    field: "visit",
+    type: "btn",
+    width: 100,
     sortable: false,
     headerName: "Visit Info",
     renderCell: () => (
-      <IconButton aria-label="visitinfo"onClick={null}>
+      <IconButton aria-label="visitinfo" onClick={null}>
         <AddCircleIcon />
       </IconButton>
-    )
-  },
-  
-];
-const rows = [
-  {
-    id: 1,
-    lastName: "Snow",
-    firstName: "Jon",
-    age: 35,
-    gender: "Male",
-    contact: 9876543210,
-    category: "A",
-    height: "170cm",
-    weight: "60kg",
-  },
-  {
-    id: 2,
-    lastName: "Lannister",
-    firstName: "Cersei",
-    age: 42,
-    gender: "Female",
-    contact: 9876543210,
-    category: "B",
-    height: "160cm",
-    weight: "70kg",
-  },
-  {
-    id: 3,
-    lastName: "Lannister",
-    firstName: "Jaime",
-    age: 45,
-    gender: "Male",
-    contact: 9876543210,
-    category: "A",
-    height: "170cm",
-    weight: "60kg",
-  },
-  {
-    id: 4,
-    lastName: "Stark",
-    firstName: "Arya",
-    age: 16,
-    gender: "Male",
-    contact: 9876543210,
-    category: "A",
-    height: "170cm",
-    weight: "60kg",
-  },
-  {
-    id: 5,
-    lastName: "Targaryen",
-    firstName: "Daenerys",
-    age: 24,
-    gender: "Male",
-    contact: 9876543210,
-    category: "A",
-    height: "170cm",
-    weight: "60kg",
-  },
-  {
-    id: 6,
-    lastName: "Melisandre",
-    firstName: "Quin",
-    age: 50,
-    gender: "Male",
-    contact: 9876543210,
-    category: "A",
-    height: "170cm",
-    weight: "60kg",
-  },
-  {
-    id: 7,
-    lastName: "Clifford",
-    firstName: "Ferrara",
-    age: 44,
-    gender: "Male",
-    contact: 9876543210,
-    category: "A",
-    height: "170cm",
-    weight: "60kg",
-  },
-  {
-    id: 8,
-    lastName: "Frances",
-    firstName: "Rossini",
-    age: 36,
-    gender: "Male",
-    contact: 9876543210,
-    category: "A",
-    height: "170cm",
-    weight: "60kg",
-  },
-  {
-    id: 9,
-    lastName: "Roxie",
-    firstName: "Harvey",
-    age: 65,
-    gender: "Male",
-    contact: 9876543210,
-    category: "A",
-    height: "170cm",
-    weight: "60kg",
-  },
-  {
-    id: 10,
-    lastName: "Roxie",
-    firstName: "Harvey",
-    age: 65,
-    gender: "Male",
-    contact: 9876543210,
-    category: "A",
-    height: "170cm",
-    weight: "60kg",
+    ),
   },
 ];
 
@@ -219,12 +112,132 @@ export default function DataTable() {
   function handleshow(breakpoint) {
     setShow(true);
   }
+  const columnsPerRow = 3;
+
+  let [rows, setrows] = useState([
+    {
+      id: 1,
+      lastName: "Snow",
+      firstName: "Jon",
+      age: 35,
+      gender: "Male",
+      contact: 9876543210,
+      category: "A",
+      height: "170cm",
+      weight: "60kg",
+    },
+    {
+      id: 2,
+      lastName: "Lannister",
+      firstName: "Cersei",
+      age: 42,
+      gender: "Female",
+      contact: 9876543210,
+      category: "B",
+      height: "160cm",
+      weight: "70kg",
+    },
+    {
+      id: 3,
+      lastName: "Lannister",
+      firstName: "Jaime",
+      age: 45,
+      gender: "Male",
+      contact: 9876543210,
+      category: "A",
+      height: "170cm",
+      weight: "60kg",
+    },
+    {
+      id: 4,
+      lastName: "Stark",
+      firstName: "Arya",
+      age: 16,
+      gender: "Male",
+      contact: 9876543210,
+      category: "A",
+      height: "170cm",
+      weight: "60kg",
+    },
+    {
+      id: 5,
+      lastName: "Targaryen",
+      firstName: "Daenerys",
+      age: 24,
+      gender: "Male",
+      contact: 9876543210,
+      category: "A",
+      height: "170cm",
+      weight: "60kg",
+    },
+    {
+      id: 6,
+      lastName: "Melisandre",
+      firstName: "Quin",
+      age: 50,
+      gender: "Male",
+      contact: 9876543210,
+      category: "A",
+      height: "170cm",
+      weight: "60kg",
+    },
+    {
+      id: 7,
+      lastName: "Clifford",
+      firstName: "Ferrara",
+      age: 44,
+      gender: "Male",
+      contact: 9876543210,
+      category: "A",
+      height: "170cm",
+      weight: "60kg",
+    },
+    {
+      id: 8,
+      lastName: "Frances",
+      firstName: "Rossini",
+      age: 36,
+      gender: "Male",
+      contact: 9876543210,
+      category: "A",
+      height: "170cm",
+      weight: "60kg",
+    },
+    {
+      id: 9,
+      lastName: "Roxie",
+      firstName: "Harvey",
+      age: 65,
+      gender: "Male",
+      contact: 9876543210,
+      category: "A",
+      height: "170cm",
+      weight: "60kg",
+    },
+    {
+      id: 10,
+      lastName: "Roxie",
+      firstName: "Harvey",
+      age: 65,
+      gender: "Male",
+      contact: 9876543210,
+      category: "A",
+      height: "170cm",
+      weight: "60kg",
+    },
+  ]);
+
+  // deleteById function for deleting the list items
+  const deleteById = (id) => {
+    setrows((oldValues) => {
+      return oldValues.filter((item) => item.id !== id);
+    });
+  };
 
   return (
     <div
       className="container"
       style={{
-        height: 630,
         width: "100%",
         borderRadius: "25px",
         background: "#5ABF84",
@@ -342,14 +355,61 @@ export default function DataTable() {
         </Search>
       </Typography>
 
-      <DataGrid
-        className="container mb-1 mt-4 bg-info"
-        style={{ borderRadius: "20px", height: "470px" }}
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-      />
+      <div className="container">
+        <Row xs={1} md={columnsPerRow}>
+          {rows
+            .slice(0)
+            .reverse()
+            .map((item) => (
+              <div className="container-fluid mt-4 mb-4 ">
+                {/* Patient Info Card */}
+                <Card style={{ background: "#D9EDDF", borderRadius: "35px" }}>
+                  <Image
+                    className="align-self-center mt-3"
+                    width={"40%"}
+                    height={"40%"}
+                    variant="top"
+                    src={require("../assets/pfp.jpg")}
+                    roundedCircle
+                  />
+                  <Card.Title>
+                    <div className="mt-3 text-center">
+                      <h4>
+                        <b>
+                          {item.firstName} {item.lastName}
+                        </b>
+                      </h4>
+                    </div>
+                  </Card.Title>
+                  <Card.Text>
+                    <div className="text-center">
+                      <h5>Patient ID: {item.id}</h5>
+                    </div>
+                    <div className="row ps-4 mt-3">
+                      <div className="col-6">
+                        <h5>Age: {item.age}</h5>
+                      </div>
+                      <div className="col-5">
+                        <h5>Weight: {item.weight}</h5>
+                      </div>
+                    </div>
+                    <div className="text-center mt-3">
+                      <h5>{item.gender}</h5>
+                    </div>
+                  </Card.Text>
+                  <div className="align-self-center mb-3">
+                    <div
+                      className="btn btn-danger"
+                      onClick={() => deleteById(item.id)}
+                    >
+                      Delete
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            ))}
+        </Row>
+      </div>
     </div>
   );
 }
