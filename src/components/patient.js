@@ -15,7 +15,6 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Image from "react-bootstrap/Image";
-
 import Card from "react-bootstrap/Card";
 
 const Search = styled("div")(({ theme }) => ({
