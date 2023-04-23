@@ -58,48 +58,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const openForm = () => {
-  return;
-};
-
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 120 },
-  { field: "lastName", headerName: "Last name", width: 140 },
-  { field: "age", headerName: "Age", type: "number", width: 30 },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    sortable: false,
-    width: 150,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-  { field: "gender", headerName: "Gender", width: 100 },
-  { field: "contact", headerName: "Contact", type: "phone", width: 120 },
-  {
-    field: "category",
-    headerName: "Category",
-    type: "category",
-    width: 100,
-    justifyContent: "center",
-  },
-  { field: "height", headerName: "Height", type: "height", width: 100 },
-  { field: "weight", headerName: "Weight", type: "weight", width: 100 },
-  {
-    field: "visit",
-    type: "btn",
-    width: 100,
-    sortable: false,
-    headerName: "Visit Info",
-    renderCell: () => (
-      <IconButton aria-label="visitinfo" onClick={null}>
-        <AddCircleIcon />
-      </IconButton>
-    ),
-  },
-];
-
 export default function DataTable() {
   const [showA, setShowA] = useState(true);
   const toggleShowA = () => setShowA(!showA);
@@ -230,7 +188,7 @@ export default function DataTable() {
       return oldValues.filter((item) => item.id !== id);
     });
   };
-// Search useState
+  // Search useState
   const [search, setSearch] = useState("");
 
   return (
