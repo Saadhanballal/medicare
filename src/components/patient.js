@@ -1,6 +1,5 @@
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import * as React from "react";
-import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
@@ -13,7 +12,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
 
