@@ -230,6 +230,8 @@ export default function DataTable() {
       return oldValues.filter((item) => item.id !== id);
     });
   };
+// Search useState
+  const [search, setSearch] = useState("");
 
   return (
     <div
@@ -341,11 +343,13 @@ export default function DataTable() {
         >
           <AddRoundedIcon></AddRoundedIcon>New Patient
         </Button>
+        {/* search bar */}
         <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
           />
@@ -357,6 +361,17 @@ export default function DataTable() {
           {rows
             .slice(0)
             .reverse()
+            .filter((item) => {
+              return search.toLocaleLowerCase() === ""
+                ? item
+                : item.firstName
+                    .toLocaleLowerCase()
+                    .includes(search.toLocaleLowerCase()) ||
+                    item.lastName
+                      .toLocaleLowerCase()
+                      .includes(search.toLocaleLowerCase()) ||
+                    item.id.toString().includes(search.toString());
+            })
             .map((item) => (
               <div className="container-fluid mt-4 mb-4 ">
                 {/* Patient Info Card */}

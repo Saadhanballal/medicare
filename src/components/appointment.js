@@ -160,6 +160,8 @@ export default function DataTable() {
       return oldValues.filter((item) => item.id !== id);
     });
   };
+  // Search useState
+  const [search, setSearch] = useState("");
 
   return (
     <div
@@ -202,11 +204,13 @@ export default function DataTable() {
         >
           <CalendarMonthIcon></CalendarMonthIcon>New Appointment
         </Button>
+        {/* Search Bar */}
         <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
           />
@@ -214,61 +218,73 @@ export default function DataTable() {
       </Typography>
 
       <div>
-        {rows.map((item) => (
-          <div
-            className="container-fluid mt-4"
-            style={{
-              height: "110px",
-              backgroundColor: "#D9EDDF",
-              borderRadius: "25px",
-            }}
-          >
-            <div key={item.id} className="d-flex flex-row">
-              <div className="row flex-shrink-1 align-self-center">
-                {/* User profile picture */}
-                <Image
-                  className="row mx-3"
-                  width={80}
-                  height={80}
-                  src={require("../assets/pfp.jpg")}
-                  roundedCircle
-                />
-              </div>
-              {/* User name */}
-              <div className="row flex-grow-1 mx-3">
-                <div className="d-flex">
-                  <h2 className="mt-1 w-100">
-                    Name:{item.firstName} {item.lastName}
-                  </h2>
-                  <div className="d-flex p-2 w-100 justify-content-end">
-                    <div
-                      className="btn btn-info mx-2"
-                      style={{ width: "75px", borderRadius: "10px" }}
-                    >
-                      Edit
-                    </div>
+        {rows
+          .filter((item) => {
+            return search.toLocaleLowerCase() === ""
+              ? item
+              : item.firstName
+                  .toLocaleLowerCase()
+                  .includes(search.toLocaleLowerCase()) ||
+                  item.lastName
+                    .toLocaleLowerCase()
+                    .includes(search.toLocaleLowerCase()) ||
+                  item.id.toString().includes(search.toString());
+          })
+          .map((item) => (
+            <div
+              className="container-fluid mt-4"
+              style={{
+                height: "110px",
+                backgroundColor: "#D9EDDF",
+                borderRadius: "25px",
+              }}
+            >
+              <div key={item.id} className="d-flex flex-row">
+                <div className="row flex-shrink-1 align-self-center">
+                  {/* User profile picture */}
+                  <Image
+                    className="row mx-3"
+                    width={80}
+                    height={80}
+                    src={require("../assets/pfp.jpg")}
+                    roundedCircle
+                  />
+                </div>
+                {/* User name */}
+                <div className="row flex-grow-1 mx-3">
+                  <div className="d-flex">
+                    <h2 className="mt-1 w-100">
+                      Name:{item.firstName} {item.lastName}
+                    </h2>
+                    <div className="d-flex p-2 w-100 justify-content-end">
+                      <div
+                        className="btn btn-info mx-2"
+                        style={{ width: "75px", borderRadius: "10px" }}
+                      >
+                        Edit
+                      </div>
 
-                    <div
-                      className="btn btn-danger mx-2"
-                      style={{ width: "75px", borderRadius: "10px" }}
-                      onClick={() => deleteById(item.id)}
-                    >
-                      Delete
+                      <div
+                        className="btn btn-danger mx-2"
+                        style={{ width: "75px", borderRadius: "10px" }}
+                        onClick={() => deleteById(item.id)}
+                      >
+                        Delete
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* appointment details display */}
-                <div className="row d-flex">
-                  <h5 className="col mt-4 ">Appointment No: {item.id}</h5>
-                  <h5 className="col mt-4">Date: {item.date}</h5>
-                  <h5 className="col mt-4">Time: {item.time}</h5>
-                  <h5 className="col mt-4">Duration: {item.duration}</h5>
+                  {/* appointment details display */}
+                  <div className="row d-flex">
+                    <h5 className="col mt-4 ">Appointment No: {item.id}</h5>
+                    <h5 className="col mt-4">Date: {item.date}</h5>
+                    <h5 className="col mt-4">Time: {item.time}</h5>
+                    <h5 className="col mt-4">Duration: {item.duration}</h5>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <div className="mt-3" style={{ height: "10px" }}></div>
     </div>
