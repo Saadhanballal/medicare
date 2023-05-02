@@ -232,7 +232,7 @@ export default function DataTable() {
           })
           .map((item) => (
             <div
-              className="container-fluid mt-4"
+              className="container-fluid mt-4 shadow-lg"
               style={{
                 height: "110px",
                 backgroundColor: "#D9EDDF",
@@ -256,16 +256,16 @@ export default function DataTable() {
                     <h2 className="mt-1 w-100">
                       Name:{item.firstName} {item.lastName}
                     </h2>
-                    <div className="d-flex p-2 w-100 justify-content-end">
+                    <div className="d-flex p-2 w-100 justify-content-end ">
                       <div
-                        className="btn btn-info mx-2"
+                        className="btn btn-info mx-2 shadow"
                         style={{ width: "75px", borderRadius: "10px" }}
                       >
                         Edit
                       </div>
 
                       <div
-                        className="btn btn-danger mx-2"
+                        className="btn btn-danger mx-2 shadow"
                         style={{ width: "75px", borderRadius: "10px" }}
                         onClick={() => deleteById(item.id)}
                       >

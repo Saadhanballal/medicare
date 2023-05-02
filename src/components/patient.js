@@ -10,10 +10,11 @@ import Button from "react-bootstrap/Button";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import IconButton from "@mui/material/IconButton";
 import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
+import { rows } from "./patientdata";
+//import PatientDetail from "./PatientDetail";
+import { Link, useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "sticky",
@@ -67,127 +68,24 @@ export default function DataTable() {
   function handleshow(breakpoint) {
     setShow(true);
   }
+
   const columnsPerRow = 3;
 
-  let [rows, setrows] = useState([
-    {
-      id: 1,
-      lastName: "Snow",
-      firstName: "Jon",
-      age: 35,
-      gender: "Male",
-      contact: 9876543210,
-      category: "A",
-      height: "170cm",
-      weight: "60kg",
-    },
-    {
-      id: 2,
-      lastName: "Lannister",
-      firstName: "Cersei",
-      age: 42,
-      gender: "Female",
-      contact: 9876543210,
-      category: "B",
-      height: "160cm",
-      weight: "70kg",
-    },
-    {
-      id: 3,
-      lastName: "Lannister",
-      firstName: "Jaime",
-      age: 45,
-      gender: "Male",
-      contact: 9876543210,
-      category: "A",
-      height: "170cm",
-      weight: "60kg",
-    },
-    {
-      id: 4,
-      lastName: "Stark",
-      firstName: "Arya",
-      age: 16,
-      gender: "Male",
-      contact: 9876543210,
-      category: "A",
-      height: "170cm",
-      weight: "60kg",
-    },
-    {
-      id: 5,
-      lastName: "Targaryen",
-      firstName: "Daenerys",
-      age: 24,
-      gender: "Male",
-      contact: 9876543210,
-      category: "A",
-      height: "170cm",
-      weight: "60kg",
-    },
-    {
-      id: 6,
-      lastName: "Melisandre",
-      firstName: "Quin",
-      age: 50,
-      gender: "Male",
-      contact: 9876543210,
-      category: "A",
-      height: "170cm",
-      weight: "60kg",
-    },
-    {
-      id: 7,
-      lastName: "Clifford",
-      firstName: "Ferrara",
-      age: 44,
-      gender: "Male",
-      contact: 9876543210,
-      category: "A",
-      height: "170cm",
-      weight: "60kg",
-    },
-    {
-      id: 8,
-      lastName: "Frances",
-      firstName: "Rossini",
-      age: 36,
-      gender: "Male",
-      contact: 9876543210,
-      category: "A",
-      height: "170cm",
-      weight: "60kg",
-    },
-    {
-      id: 9,
-      lastName: "Roxie",
-      firstName: "Harvey",
-      age: 65,
-      gender: "Male",
-      contact: 9876543210,
-      category: "A",
-      height: "170cm",
-      weight: "60kg",
-    },
-    {
-      id: 10,
-      lastName: "Roxie",
-      firstName: "Harvey",
-      age: 65,
-      gender: "Male",
-      contact: 9876543210,
-      category: "A",
-      height: "170cm",
-      weight: "60kg",
-    },
-  ]);
+  const navigate = useNavigate();
+  const view = () => {
+    navigate("/PatientDetail");
+  };
+
+  let [row, setrow] = useState(rows);
 
   // deleteById function for deleting the list items
-  const deleteById = (id) => {
-    setrows((oldValues) => {
-      return oldValues.filter((item) => item.id !== id);
-    });
-  };
+  // const deleteById = (id) => {
+  // setrow((oldValues) => {
+  //     return oldValues.value(row).filter((item) => item.id !== id);
+  //   });
+  //   const newrow = rows.filter((item) => item.id !== id);
+  //   setrow(newrow);
+  // };
   // Search useState
   const [search, setSearch] = useState("");
 
@@ -331,11 +229,14 @@ export default function DataTable() {
                     item.id.toString().includes(search.toString());
             })
             .map((item) => (
-              <div className="container-fluid mt-4 mb-4 ">
+              <div key={item.id} className="container-fluid mt-4 mb-4">
                 {/* Patient Info Card */}
-                <Card style={{ background: "#D9EDDF", borderRadius: "35px" }}>
+                <Card
+                  style={{ background: "#D9EDDF", borderRadius: "35px" }}
+                  className="shadow-lg"
+                >
                   <Image
-                    className="align-self-center mt-3"
+                    className="align-self-center mt-3 shadow"
                     width={"40%"}
                     height={"40%"}
                     variant="top"
@@ -368,12 +269,9 @@ export default function DataTable() {
                     </div>
                   </Card.Text>
                   <div className="align-self-center mb-3">
-                    <div
-                      className="btn btn-danger"
-                      onClick={() => deleteById(item.id)}
-                    >
-                      Delete
-                    </div>
+                    <Button onClick={view} className="btn btn-info shadow">
+                      View
+                    </Button>
                   </div>
                 </Card>
               </div>

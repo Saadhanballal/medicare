@@ -54,6 +54,9 @@ function ResponsiveAppBar() {
   const navPatients = () => {
     navigate("/patients");
   };
+  const navView = () => {
+    navigate("/patientDetail");
+  };
 
   return (
     <>
